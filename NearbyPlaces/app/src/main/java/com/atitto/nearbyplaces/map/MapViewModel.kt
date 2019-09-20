@@ -34,4 +34,9 @@ class MapViewModelImpl(private val locationUseCase: LocationUseCase,
         locationUseCase.requestLocation { it?.let { compositeDisposable.makeActionAndConsume(placesUseCase.getPlaces(LatLng(it.latitude, it.longitude)), errorLiveData, nearByPlacesLiveData) } }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.dispose()
+    }
+
 }
